@@ -28,6 +28,13 @@ class PageUtils {
         return new Promise(poll);
     }
 
+    static waitForFlag(flagObject, flagName, timeout=500) {
+        const poll = resolve => {
+            if (flagObject[flagName]) { resolve(); } else { setTimeout(_ => poll(resolve), timeout); }
+        }
+        return new Promise(poll);
+    }
+
     /**
      * Return the value associated with <name> from local storage.  If the
      * named value is not defined then return <fallback> and create a new
