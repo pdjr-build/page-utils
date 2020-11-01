@@ -6,10 +6,16 @@ class PageUtils {
             if (id != null) retval.id = id;
             if (classname != null) retval.className = classname;
             if (content != null) {
-                if (typeof content === "object") {
-                    retval.appendChild(content);
-                } else {
-                     retval.innerHTML = content;
+                switch(type) {
+                    case 'img':
+                        retval.src = content;
+                        break;
+                    default:
+                        if (typeof content === "object") {
+                            retval.appendChild(content);
+                        } else {
+                            retval.innerHTML = content;
+                        }
                 }
             }
         }
